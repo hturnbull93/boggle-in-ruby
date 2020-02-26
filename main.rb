@@ -1,3 +1,5 @@
+require "pp"
+
 def roll_dice
   dice = [
     ["R", "I", "F", "O", "B", "X"],
@@ -17,21 +19,40 @@ def roll_dice
     ["U", "W", "I", "L", "R", "G"],
     ["P", "A", "C", "E", "M", "D"],
   ]
-  dice.shuffle.map do |die|
-    die.sample
-  end
+  dice.shuffle.map{ |die| die.sample}.each_slice(4).to_a
 end
 
-def display_grid(cells)
+def display_grid(rolls)
 
-  puts "+-----+-----+-----+-----+"
-  puts "|  #{cells[0]}  |  #{cells[1]}  |  #{cells[2]}  |  #{cells[3]}  |"
-  puts "+-----+-----+-----+-----+"
-  puts "|  #{cells[4]}  |  #{cells[5]}  |  #{cells[6]}  |  #{cells[7]}  |"
-  puts "+-----+-----+-----+-----+"
-  puts "|  #{cells[8]}  |  #{cells[9]}  |  #{cells[10]}  |  #{cells[11]}  |"
-  puts "+-----+-----+-----+-----+"
-  puts "|  #{cells[12]}  |  #{cells[13]}  |  #{cells[14]}  |  #{cells[15]}  |"
-  puts "+-----+-----+-----+-----+"
+  # gridded = rolls.map do |e|
+  #   e.ljust(2)
+  # end.each_slice(4) do |slice|
+  #   slice
+  # end.to_a
+
+  # row = "+-----+-----+-----+-----+"
+
+  # grid.each do |a|
+    
+  # end
+
+  p grid = rolls
+
+
+  # puts "+-----+-----+-----+-----+"
+  # puts "|  #{cells[0]}  |  #{cells[1]}  |  #{cells[2]}  |  #{cells[3]}  |"
+  # puts "+-----+-----+-----+-----+"
+  # puts "|  #{cells[4]}  |  #{cells[5]}  |  #{cells[6]}  |  #{cells[7]}  |"
+  # puts "+-----+-----+-----+-----+"
+  # puts "|  #{cells[8]}  |  #{cells[9]}  |  #{cells[10]}  |  #{cells[11]}  |"
+  # puts "+-----+-----+-----+-----+"
+  # puts "|  #{cells[12]}  |  #{cells[13]}  |  #{cells[14]}  |  #{cells[15]}  |"
+  # puts "+-----+-----+-----+-----+"
 
 end
+
+
+
+
+new_grid = roll_dice
+p new_rolls
