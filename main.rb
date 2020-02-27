@@ -1,6 +1,6 @@
 class Boggle
   def initialize
-    @grid = @@dice.shuffle.map{ &:sample }.each_slice(4).to_a
+    @grid = @@dice.shuffle.map{ |die| die.sample }.each_slice(4).to_a
   end
 
   def display
