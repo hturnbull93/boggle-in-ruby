@@ -1,10 +1,9 @@
 class Boggle
   def initialize
-    
     @grid = @@dice.shuffle.map{|die| die.sample}.each_slice(4).to_a
   end
-  
-  def display
+
+def display
     puts row = "+-----+-----+-----+-----+"
     @grid.each do |line|
       puts "|  #{line.map { |c| c.ljust(2)}.join(" |  ")} |"
