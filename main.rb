@@ -19,40 +19,23 @@ def roll_dice
     ["U", "W", "I", "L", "R", "G"],
     ["P", "A", "C", "E", "M", "D"],
   ]
-  dice.shuffle.map{ |die| die.sample}.each_slice(4).to_a
+
+  dice.shuffle.map{|die| die.sample}.each_slice(4).to_a
 end
 
-def display_grid(rolls)
-
-  # gridded = rolls.map do |e|
-  #   e.ljust(2)
-  # end.each_slice(4) do |slice|
-  #   slice
-  # end.to_a
-
-  # row = "+-----+-----+-----+-----+"
-
-  # grid.each do |a|
-    
-  # end
-
-  p grid = rolls
-
-
-  # puts "+-----+-----+-----+-----+"
-  # puts "|  #{cells[0]}  |  #{cells[1]}  |  #{cells[2]}  |  #{cells[3]}  |"
-  # puts "+-----+-----+-----+-----+"
-  # puts "|  #{cells[4]}  |  #{cells[5]}  |  #{cells[6]}  |  #{cells[7]}  |"
-  # puts "+-----+-----+-----+-----+"
-  # puts "|  #{cells[8]}  |  #{cells[9]}  |  #{cells[10]}  |  #{cells[11]}  |"
-  # puts "+-----+-----+-----+-----+"
-  # puts "|  #{cells[12]}  |  #{cells[13]}  |  #{cells[14]}  |  #{cells[15]}  |"
-  # puts "+-----+-----+-----+-----+"
-
+def display_grid(grid)
+  puts row = "+-----+-----+-----+-----+"
+  
+  grid.each do |line|
+    puts "|  #{line.map { |c| c.ljust(2)}.join(" |  ")} |"
+    puts row
+  end
 end
 
 
 
 
-new_grid = roll_dice
-p new_rolls
+new_rolls = roll_dice
+display_grid(new_rolls)
+
+# => [["F", "U", "S", "D"], ["S", "K", "E", "P"], ["R", "O", "O", "V"], ["I", "Qu", "U", "H"]
