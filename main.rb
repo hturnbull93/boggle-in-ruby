@@ -1,3 +1,6 @@
+require 'io/console'
+
+
 class Boggle
   def initialize
     @grid = @@dice.shuffle.map{ |die| die.sample }.each_slice(4).to_a
@@ -32,24 +35,56 @@ class Boggle
 end
 
 new_game = Boggle.new
-new_game.display
 
 # Example grid => [['F', 'U', 'S', 'D'], ['S', 'K', 'E', 'P'], ['R', 'O', 'O', 'V'], ['I', 'Qu', 'U', 'H']
 
-
-
-words = []
-
-while true
-  input = gets.chomp
-  if input == " "
-    puts "Do you mean to quit? y/n"
-    quit = gets.chomp
-    if quit == "y"
-      puts words.join(", ")
-      break
+def gets_with_quit
+  char = ''
+  string = ''
+  while true do 
+    char = STDIN.getch
+    if char.ord == 27
+      return false
     end
-  else
-    words.push(input)
+    if char.ord == 13
+      puts
+      return string
+    end
+    print char
+    string += char
   end
 end
+
+
+def word_getter
+  words = []
+
+  while true
+    new_game.display
+    input = gets_with_quit
+
+    if input == false
+      puts; puts "Are you sure you want to quit? y/n"
+      
+      while true
+        case STDIN.noecho(&:getch)
+        when "y"
+          puts; puts "Your words are:"
+          puts words.join(", ")
+          return words
+        when "n"
+          puts "Continue"
+          break
+        end
+      end
+
+    else
+      words.push(input.split)
+    end
+
+  end
+end
+
+ word_getter
+
+# to clear screen => puts "\e[H\e[2J"
