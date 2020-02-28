@@ -1,6 +1,5 @@
 require 'io/console'
 
-
 class Boggle
   def initialize
     @grid = @@dice.shuffle.map{ |die| die.sample }.each_slice(4).to_a
@@ -34,10 +33,6 @@ class Boggle
   ]
 end
 
-new_game = Boggle.new
-
-# Example grid => [['F', 'U', 'S', 'D'], ['S', 'K', 'E', 'P'], ['R', 'O', 'O', 'V'], ['I', 'Qu', 'U', 'H']
-
 def gets_with_quit
   char = ''
   string = ''
@@ -55,29 +50,30 @@ def gets_with_quit
   end
 end
 
-
-def word_getter
+def word_input
   words = []
 
+  puts "Type in your words, press enter to submit."
+
+
   while true
-    new_game.display
     input = gets_with_quit
 
     if input == false
       puts; puts "Are you sure you want to quit? y/n"
-      
+
       while true
         case STDIN.noecho(&:getch)
-        when "y"
-          puts; puts "Your words are:"
-          puts words.join(", ")
+        when 'y'
+          puts; puts 'Your words are:'
+          p words.join(', ')
           return words
         when "n"
           puts "Continue"
           break
         end
       end
-
+  
     else
       words.push(input.split)
     end
@@ -85,6 +81,44 @@ def word_getter
   end
 end
 
- word_getter
+# new_game = Boggle.new
+# new_game.display
+# word_input
+
+
+
+# Example grid => [['F', 'U', 'S', 'D'], ['S', 'K', 'E', 'P'], ['R', 'O', 'O', 'V'], ['I', 'Qu', 'U', 'H']
 
 # to clear screen => puts "\e[H\e[2J"
+
+
+def prev_input
+  
+  words = []
+
+  puts "Type in your words, press enter to submit."
+
+  while true
+    input = gets.chomp
+
+    if input == '!'
+      puts "Your words are:"
+      puts words.join(', ')
+    else
+      words.push(input)
+    end
+  end
+  
+end
+
+
+def timer
+  time = 0
+  while time < 5
+    sleep 1
+    time += 1
+    puts time
+  end
+end
+
+timer
