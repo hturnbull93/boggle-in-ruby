@@ -35,3 +35,21 @@ new_game = Boggle.new
 new_game.display
 
 # Example grid => [['F', 'U', 'S', 'D'], ['S', 'K', 'E', 'P'], ['R', 'O', 'O', 'V'], ['I', 'Qu', 'U', 'H']
+
+
+
+words = []
+
+while true
+  input = gets.chomp
+  if input == " "
+    puts "Do you mean to quit? y/n"
+    quit = gets.chomp
+    if quit == "y"
+      break
+    end
+  else
+    words.push(input)
+    print words.join(", ")
+  end
+end
