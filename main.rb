@@ -46,10 +46,10 @@ while true
     puts "Do you mean to quit? y/n"
     quit = gets.chomp
     if quit == "y"
+      puts words.join(", ")
       break
     end
   else
     words.push(input)
-    print words.join(", ")
   end
 end
