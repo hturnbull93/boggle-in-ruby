@@ -41,35 +41,37 @@ def word_input
   
   puts "Type in your words, press enter to submit."
   
-  time_remaining = true
-  entering_words = true
+  still_time = true
+  quit = false
 
   timer = Thread.new {
     time = 5
-    while entering_words && time > 0
+    while quit == false && time > 0
       sleep 1
       time -=1
     end
-    puts "Time's up! Finish your last word."
-    time_remaining = false
+    still_time = false
   }
-
-  while time_remaining
-    if time_remaining
+  
+  while still_time
     input = gets.chomp
-      if input == '!'
-        entering_words = false
-        break
-      else
-        words.push(input)
-      end
+    if input == '!'
+      quit = true
+      break
+    else
+      words.push(input)
     end
   end
+  
+  timer.join
 
+  if
+  puts "Time's up! Finish your last word."
+
+  
   puts "Your words are:"
   puts words.join(', ')
-
-  timer.join
+  
 end
 
 new_game = Boggle.new
