@@ -33,6 +33,54 @@ class Boggle
   ]
 end
 
+
+
+def word_input
+  
+  words = []
+  
+  puts "Type in your words, press enter to submit."
+  
+  time_remaining = true
+  entering_words = true
+
+  timer = Thread.new {
+    time = 5
+    while entering_words && time > 0
+      sleep 1
+      time -=1
+    end
+    puts "Time's up! Finish your last word."
+    time_remaining = false
+  }
+
+  while time_remaining
+    if time_remaining
+    input = gets.chomp
+      if input == '!'
+        entering_words = false
+        break
+      else
+        words.push(input)
+      end
+    end
+  end
+
+  puts "Your words are:"
+  puts words.join(', ')
+
+  timer.join
+end
+
+new_game = Boggle.new
+new_game.display
+word_input
+
+
+
+
+=begin 
+
 def gets_with_quit
   char = ''
   string = ''
@@ -49,6 +97,7 @@ def gets_with_quit
     string += char
   end
 end
+
 
 def word_input
   words = []
@@ -80,45 +129,9 @@ def word_input
 
   end
 end
-
-# new_game = Boggle.new
-# new_game.display
-# word_input
-
+=end
 
 
 # Example grid => [['F', 'U', 'S', 'D'], ['S', 'K', 'E', 'P'], ['R', 'O', 'O', 'V'], ['I', 'Qu', 'U', 'H']
 
 # to clear screen => puts "\e[H\e[2J"
-
-
-def prev_input
-  
-  words = []
-
-  puts "Type in your words, press enter to submit."
-
-  while true
-    input = gets.chomp
-
-    if input == '!'
-      puts "Your words are:"
-      puts words.join(', ')
-    else
-      words.push(input)
-    end
-  end
-  
-end
-
-
-def timer
-  time = 0
-  while time < 5
-    sleep 1
-    time += 1
-    puts time
-  end
-end
-
-timer
