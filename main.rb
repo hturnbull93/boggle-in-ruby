@@ -1,8 +1,8 @@
-require 'io/console'
-
 class Boggle
   def initialize
     @grid = @@dice.shuffle.map(&:sample).each_slice(4).to_a
+    @words = []
+    @time = 180
   end
 
   def display
@@ -11,6 +11,33 @@ class Boggle
       puts "|  #{line.map { |c| c.ljust(2) }.join(' |  ')} |"
       puts row
     end
+  end
+
+  def play
+    puts 'Type in your words, press enter to submit.'
+    player_input = Thread.new do
+      timer = Thread.new do
+        while @time > 0
+          sleep 1
+          @time -= 1
+        end
+        puts "\nTime's up!"
+        player_input.exit
+      end
+      loop do
+        input = gets.chomp
+        if input == '!'
+          timer.exit
+          puts "You quit early with #{@time} seconds to go."
+          break
+        else
+          @words.push(input)
+        end
+      end
+    end
+    player_input.join
+    puts 'Your words are:'
+    puts @words.join(', ')
   end
 
   @@dice = [
@@ -33,48 +60,11 @@ class Boggle
   ]
 end
 
-def word_input
-  words = []
-
-  puts 'Type in your words, press enter to submit.'
-
-  player_input = Thread.new do
-
-    time = 5
-
-    timer = Thread.new do
-      while time > 0
-        sleep 1
-        time -= 1
-      end
-      puts "\nTime's up!"
-      player_input.exit
-    end
-    
-    loop do
-      input = gets.chomp
-      if input == '!'
-        timer.exit
-        puts "You quit early with #{time} seconds to go."
-        break
-      else
-        words.push(input)
-      end
-    end
-
-  end
-
-  player_input.join
-
-  puts 'Your words are:'
-  puts words.join(', ')
-  
-end
-
 new_game = Boggle.new
 new_game.display
-word_input
+new_game.play
 
+# require 'io/console'
 #
 # def gets_with_quit
 #   char = ''
@@ -93,7 +83,7 @@ word_input
 #   end
 # end
 #
-# def word_input
+# def get_words
 #   words = []
 #
 #   puts "Type in your words, press enter to submit."
