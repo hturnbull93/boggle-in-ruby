@@ -42,11 +42,10 @@ def word_input
   puts "Type in your words, press enter to submit."
   
   still_time = true
-  quit = false
 
   timer = Thread.new {
     time = 5
-    while quit == false && time > 0
+    while time > 0
       sleep 1
       time -=1
     end
@@ -56,7 +55,7 @@ def word_input
   while still_time
     input = gets.chomp
     if input == '!'
-      quit = true
+      timer.exit
       break
     else
       words.push(input)
@@ -65,7 +64,6 @@ def word_input
   
   timer.join
 
-  if
   puts "Time's up! Finish your last word."
 
   
